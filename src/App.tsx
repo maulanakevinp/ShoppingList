@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
 import {
+  View,
   Text,
   ScrollView,
 } from 'react-native';
@@ -92,37 +93,40 @@ const App = () => {
   const total = items.reduce((accumulator, item) => accumulator + item.price * item.quantity, 0);
 
   return (
-    <ScrollView
-      style={[styles.screen, theme.screen]}
-      contentContainerStyle={styles.container}
+    <View
+      style={[styles.screen, theme.screen]}  
     >
       <Text
         style={[styles.title, theme.text]}
       >
         Kalkulator Daftar Belanja
       </Text>
-      {items.length > 0 && items.map(item => (
-        <ShoppingItemCard
-          key={item.id}
-          item={item}
-          theme={theme}
-          onItemNameChange={handleItemNameChange}
-          onItemPriceChange={handleItemPriceChange}
-          onItemQuantityDecrease={handleItemQuantityDecrease}
-          onItemQuantityIncrease={handleItemQuantityIncrease}
-        />
-      ))}
-      <Text
-        style={[styles.grandTotal, theme.text]}
+      <ScrollView
+        contentContainerStyle={styles.container}
       >
-        Total: {formatCurrencyIDR(total)}
-      </Text>
+        {items.length > 0 && items.map(item => (
+          <ShoppingItemCard
+            key={item.id}
+            item={item}
+            theme={theme}
+            onItemNameChange={handleItemNameChange}
+            onItemPriceChange={handleItemPriceChange}
+            onItemQuantityDecrease={handleItemQuantityDecrease}
+            onItemQuantityIncrease={handleItemQuantityIncrease}
+          />
+        ))}
+        <Text
+          style={[styles.grandTotal, theme.text]}
+        >
+          Total: {formatCurrencyIDR(total)}
+        </Text>
+      </ScrollView>
       <FloatingActions
         darkMode={darkMode}
         onToggleTheme={handleThemeToggle}
         onAddItem={handleAddItem}
       />
-    </ScrollView>
+    </View>
   );
 };
 export default App;

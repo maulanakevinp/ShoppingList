@@ -47,7 +47,7 @@ const ShoppingItemCard = ({
             onPress={() => onItemQuantityDecrease(item.id)}
             style={styles.quantityButton}
           >
-            <FontAwesomeFreeSolid name="minus" size={8} color={theme.iconColor} />
+            <FontAwesomeFreeSolid name="minus" size={8} color={`#fff`} />
           </TouchableOpacity>
           <Text style={[styles.quantityText, theme.text]}>
             {item.quantity}
@@ -56,7 +56,7 @@ const ShoppingItemCard = ({
             onPress={() => onItemQuantityIncrease(item.id)}
             style={styles.quantityButton}
           >
-            <FontAwesomeFreeSolid name="plus" size={8} color={theme.iconColor} />
+            <FontAwesomeFreeSolid name="plus" size={8} color={`#fff`} />
           </TouchableOpacity>
         </View>
         <Text style={[styles.itemTotal, theme.text]}>

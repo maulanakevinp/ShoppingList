@@ -11,12 +11,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
   },
   container: {
-    padding: 20,
+    paddingHorizontal: 20,
     gap: 10,
-    position: 'relative',
-    height: '100%',
+    paddingBottom: 150,
   },
   title: {
+    padding: 10,
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
