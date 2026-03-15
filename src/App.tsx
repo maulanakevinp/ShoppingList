@@ -1,10 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
 import {
-  View,
   Text,
   ScrollView,
+  StatusBar,
 } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import styles from './Style';
 import useThemeStyles from './useThemeStyles';
 import ShoppingItemCard from './ShoppingItemCard';
@@ -93,40 +94,46 @@ const App = () => {
   const total = items.reduce((accumulator, item) => accumulator + item.price * item.quantity, 0);
 
   return (
-    <View
-      style={[styles.screen, theme.screen]}  
-    >
-      <Text
-        style={[styles.title, theme.text]}
-      >
-        Kalkulator Daftar Belanja
-      </Text>
-      <ScrollView
-        contentContainerStyle={styles.container}
-      >
-        {items.length > 0 && items.map(item => (
-          <ShoppingItemCard
-            key={item.id}
-            item={item}
-            theme={theme}
-            onItemNameChange={handleItemNameChange}
-            onItemPriceChange={handleItemPriceChange}
-            onItemQuantityDecrease={handleItemQuantityDecrease}
-            onItemQuantityIncrease={handleItemQuantityIncrease}
-          />
-        ))}
-        <Text
-          style={[styles.grandTotal, theme.text]}
-        >
-          Total: {formatCurrencyIDR(total)}
-        </Text>
-      </ScrollView>
-      <FloatingActions
-        darkMode={darkMode}
-        onToggleTheme={handleThemeToggle}
-        onAddItem={handleAddItem}
+    <SafeAreaProvider>
+      <StatusBar
+        barStyle={darkMode ? 'light-content' : 'dark-content'}
+        backgroundColor={darkMode ? '#333' : '#f5f5f5'}
       />
-    </View>
+      <SafeAreaView
+        style={[styles.screen, theme.screen]}
+      >
+        <Text
+          style={[styles.title, theme.text]}
+        >
+          Kalkulator Daftar Belanja
+        </Text>
+        <ScrollView
+          contentContainerStyle={styles.container}
+        >
+          {items.length > 0 && items.map(item => (
+            <ShoppingItemCard
+              key={item.id}
+              item={item}
+              theme={theme}
+              onItemNameChange={handleItemNameChange}
+              onItemPriceChange={handleItemPriceChange}
+              onItemQuantityDecrease={handleItemQuantityDecrease}
+              onItemQuantityIncrease={handleItemQuantityIncrease}
+            />
+          ))}
+          <Text
+            style={[styles.grandTotal, theme.text]}
+          >
+            Total: {formatCurrencyIDR(total)}
+          </Text>
+        </ScrollView>
+        <FloatingActions
+          darkMode={darkMode}
+          onToggleTheme={handleThemeToggle}
+          onAddItem={handleAddItem}
+        />
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 export default App;

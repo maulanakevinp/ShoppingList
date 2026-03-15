@@ -95,10 +95,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 17,
     paddingVertical: 15,
     borderRadius: 100,
-    margin: 20,
     position: 'absolute',
-    bottom: 0,
-    right: 0,
+    bottom: 20,
+    right: 20,
   },
 });
 
